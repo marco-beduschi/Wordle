@@ -1,14 +1,11 @@
 import React from "react";
+import Guess from "../Guess";
 
 function GuessHistory({ guesses }) {
   return (
     <div className="guess-results">
       {guesses.map((guess) => {
-        return (
-          <p key={`${guess}-${Math.random()}`} className="guess">
-            {guess}
-          </p>
-        );
+        return <Guess key={`${guess}-${Math.random}`} value={guess} />;
       })}
     </div>
   );

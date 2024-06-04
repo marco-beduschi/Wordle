@@ -1,13 +1,17 @@
 import React from "react";
 import { range, uuid } from "../../utils";
+import { checkGuess } from "../../game-helpers";
 
-function Guess({ value }) {
+function Guess({ value, answer }) {
+  // const verifiedGuess = checkGuess(value);
+  // console.log(verifiedGuess);
+
   return (
     <p className="guess">
       {value &&
-        value.split("").map((letter) => {
+        checkGuess(value, answer).map(({ letter, status }) => {
           return (
-            <span key={uuid(letter)} className="cell">
+            <span key={uuid(letter)} className={`cell ${status}`}>
               {letter}
             </span>
           );

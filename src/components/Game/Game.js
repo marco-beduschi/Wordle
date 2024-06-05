@@ -1,6 +1,7 @@
 import React from "react";
 import GuessInput from "../GuessInput";
 import GuessHistory from "../GuessHistory";
+import Keyboard from "../Keyboard";
 import GameOverBanner from "../GameOverBanner";
 
 import { sample } from "../../utils";
@@ -34,6 +35,7 @@ function Game() {
     <>
       <GuessHistory guesses={guesses} answer={answer} />
       <GuessInput onGuess={handleGuess} disabled={gameState !== "running"} />
+      <Keyboard guesses={guesses} answer={answer} />
       {gameState !== "running" && (
         <GameOverBanner
           hasWon={gameState === "won"}

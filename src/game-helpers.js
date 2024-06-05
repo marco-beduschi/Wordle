@@ -6,14 +6,14 @@
 export function checkGuess(guess, answer) {
   // This constant is a placeholder that indicates we've successfully
   // dealt with this character (it's correct, or misplaced).
-  const SOLVED_CHAR = '✓';
+  const SOLVED_CHAR = "✓";
 
   if (!guess) {
     return null;
   }
 
-  const guessChars = guess.toUpperCase().split('');
-  const answerChars = answer.split('');
+  const guessChars = guess.toUpperCase().split("");
+  const answerChars = answer.split("");
 
   const result = [];
 
@@ -22,7 +22,7 @@ export function checkGuess(guess, answer) {
     if (guessChars[i] === answerChars[i]) {
       result[i] = {
         letter: guessChars[i],
-        status: 'correct',
+        status: "correct",
       };
       answerChars[i] = SOLVED_CHAR;
       guessChars[i] = SOLVED_CHAR;
@@ -36,12 +36,12 @@ export function checkGuess(guess, answer) {
       continue;
     }
 
-    let status = 'incorrect';
+    let status = "incorrect";
     const misplacedIndex = answerChars.findIndex(
       (char) => char === guessChars[i]
     );
     if (misplacedIndex >= 0) {
-      status = 'misplaced';
+      status = "misplaced";
       answerChars[misplacedIndex] = SOLVED_CHAR;
     }
 
@@ -52,4 +52,32 @@ export function checkGuess(guess, answer) {
   }
 
   return result;
+}
+
+export function checkLetters(guesses, answer) {
+  const flattenedGuesses = guesses
+    .map((guess) => checkGuess(guess, answer))
+    .flat();
+  const letterStatusMap = {};
+  const statusOrder = {
+    incorrect: 0,
+    misplaced: 1,
+    correct: 2,
+  };
+
+  flattenedGuesses.forEach(({ letter, status }) => {
+    if (
+      !letterStatusMap[letter] ||
+      statusOrder[status] > statusOrder[letterStatusMap[letter]]
+    ) {
+      letterStatusMap[letter] = status;
+    }
+  });
+
+  const lettersGuess = Object.keys(letterStatusMap).map((letter) => ({
+    letter,
+    status: letterStatusMap[letter],
+  }));
+
+  return lettersGuess;
 }

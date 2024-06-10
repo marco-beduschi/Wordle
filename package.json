@@ -18,7 +18,7 @@
     "predev": "rimraf .parcel-cache dist",
     "dev": "parcel public/index.html",
     "build": "parcel build public/index.html --public-url ./",
-    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "deploy": "git push origin `git subtree split --prefix dist main`:gh-pages --force",
     "new-component": "new-component"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"

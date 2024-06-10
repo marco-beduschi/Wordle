@@ -1,6 +1,5 @@
 import React from "react";
 import { checkLetters } from "../../game-helpers";
-import { uuid } from "../../utils";
 
 function Key({ letter, className }) {
   return (
@@ -26,7 +25,7 @@ function Keyboard({ guesses, answer }) {
     <div className="keyboard">
       {keyboardKeys.map((row) => {
         return (
-          <div key={uuid()} className="keyboard-row">
+          <div key={row} className="keyboard-row">
             {row.map((key) => (
               <Key
                 key={key}

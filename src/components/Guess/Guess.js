@@ -1,5 +1,5 @@
 import React from "react";
-import { range, uuid } from "../../utils";
+import { range } from "../../utils";
 import { checkGuess } from "../../game-helpers";
 
 function Cell({ status, children }) {
@@ -12,9 +12,9 @@ function Guess({ value, answer }) {
   return (
     <p className="guess">
       {value &&
-        checkGuess(value, answer).map(({ letter, status }) => {
+        checkGuess(value, answer).map(({ letter, status }, index) => {
           return (
-            <Cell key={uuid(letter)} status={status}>
+            <Cell key={index} status={status}>
               {letter}
             </Cell>
           );

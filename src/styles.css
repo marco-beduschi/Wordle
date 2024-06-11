@@ -3,8 +3,10 @@
 */
 html {
   overflow-y: scroll;
+  background-color: white;
 
   --game-spacing: 32px;
+  --header-title-color: var(--color-gray-700);
   --header-height: 4rem;
 
   --color-success: hsl(150deg 70% 30%);
@@ -15,6 +17,24 @@ html {
   --color-gray-500: hsl(0deg 0% 50%);
   --color-gray-700: hsl(0deg 0% 75%);
   --color-gray-900: hsl(0deg 0% 90%);
+  --cell-background-color: var(--color-gray-700);
+  --keyboard-key-color: black;
+  --keyboard-key-background-color: var(--color-gray-900);
+  --guess-input-color: black;
+  --guess-input-background-color: white;
+
+  &[data-theme="dark"] {
+    color: var(--color-gray-900);
+    background-color: black;
+
+    --header-title-color: var(--color-gray-900);
+
+    --keyboard-key-background-color: var(--color-gray-500);
+    --keyboard-key-color: var(--color-gray-900);
+    --cell-background-color: var(--color-gray-300);
+    --guess-input-background-color: black;
+    --guess-input-color: white;
+  }
 }
 
 /*
@@ -40,17 +60,11 @@ button {
   color: inherit;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
 header {
   display: flex;
   height: var(--header-height);
   border-bottom: 1px solid var(--color-gray-700);
-  color: var(--color-gray-300);
+  color: var(--header-title-color);
 }
 
 header .side {
@@ -70,6 +84,21 @@ h1 {
   h1 {
     font-size: 1.25rem;
   }
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .game-wrapper {
@@ -102,7 +131,7 @@ h1 {
   display: grid;
   place-content: center;
   aspect-ratio: 1 / 1;
-  border: 2px solid var(--color-gray-700);
+  border: 2px solid var(--cell-background-color);
   border-radius: var(--radius);
   font-size: 2rem;
 
@@ -152,6 +181,8 @@ h1 {
 }
 
 .guess-input-wrapper input {
+  color: var(--guess-input-color);
+  background-color: var(--guess-input-background-color);
   display: block;
   width: 100%;
   font-size: 2rem;
@@ -177,7 +208,8 @@ h1 {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--color-gray-900);
+      color: var(--keyboard-key-color);
+      background-color: var(--keyboard-key-background-color);
       font-weight: bold;
       border-radius: 4px;
       text-transform: uppercase;

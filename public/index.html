@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="../src/reset.css" />
     <link rel="stylesheet" href="../src/styles.css" />
     <script type="module" src="../src/index.js"></script>
+
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.dataset.theme = "dark";
+      } else {
+        document.documentElement.dataset.theme = "light";
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

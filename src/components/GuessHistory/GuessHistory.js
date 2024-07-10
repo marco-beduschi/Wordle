@@ -7,7 +7,9 @@ function GuessHistory({ guesses, answer }) {
   return (
     <div className="guess-results">
       {range(NUM_OF_GUESSES_ALLOWED).map((num) => {
-        return <Guess key={num} value={guesses[num]} answer={answer} />;
+        return (
+          <Guess key={num} value={guesses[num]} answer={answer} row={num + 1} />
+        );
       })}
     </div>
   );

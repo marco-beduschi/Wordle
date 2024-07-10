@@ -315,3 +315,13 @@ h1 {
     opacity: 1;
   }
 }
+
+@keyframes shrinkToNormal {
+  from {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

@@ -1,10 +1,11 @@
 import React from "react";
 import { checkLetters } from "../../game-helpers";
 
-function Key({ letter, className }) {
+function Key({ letter, className, isPressed }) {
   return (
     <button
       className={className ? `keyboard-key ${className}` : "keyboard-key"}
+      style={{ animation: isPressed ? "shrinkToNormal 200ms" : undefined }}
       disabled
     >
       {letter}
@@ -13,6 +14,7 @@ function Key({ letter, className }) {
 }
 
 function Keyboard({ guesses, answer }) {
+  const [keyPressed, setKeyPressed] = React.useState("");
   const keyboardKeys = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -20,6 +22,16 @@ function Keyboard({ guesses, answer }) {
   ];
 
   const checkedLetters = checkLetters(guesses, answer);
+
+  React.useEffect(() => {
+    function handleKeyUp(e) {
+      setKeyPressed(e.key.toUpperCase());
+    }
+
+    window.addEventListener("keydown", handleKeyUp);
+
+    return () => window.removeEventListener("keydown", handleKeyUp);
+  }, []);
 
   return (
     <div className="keyboard">
@@ -30,6 +42,7 @@ function Keyboard({ guesses, answer }) {
               <Key
                 key={key}
                 letter={key}
+                isPressed={keyPressed === key}
                 className={
                   checkedLetters.find(({ letter }) => letter === key)?.status
                 }
